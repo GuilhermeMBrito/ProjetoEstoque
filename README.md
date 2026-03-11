@@ -37,43 +37,43 @@ Estrutura de Endpoints da API
 Categoria
 
 •	GET /api/Categoria/BuscarCategoria
-  o	Retorna todas as categorias cadastradas.
+Retorna todas as categorias cadastradas.
 Produto
 
 •	GET /api/Produto/BuscarUmProduto?id={id}
-  o	Retorna um produto específico baseado no ID informado na query string.
+Retorna um produto específico baseado no ID informado na query string.
 
 •	POST /api/Produto/BuscarProdutos
-  o	Busca produtos de acordo com os filtros enviados no body em formato JSON:
-  o	{
-  o	  "id_Produto": 0,
-  o	  "codigo_Produto": 0,
-  o	  "nome_Produto": "string",
-  o	  "valor_Produto": 0,
-  o	  "id_Categoria": 0
-  o	}
+Busca produtos de acordo com os filtros enviados no body em formato JSON:
+ {
+    "id_Produto": 0,
+    "codigo_Produto": 0,
+    "nome_Produto": "string",
+    "valor_Produto": 0,
+    "id_Categoria": 0
+ }
 
 •	POST /api/Produto/InserirProduto
-  o	Insere um novo produto usando o body JSON:
-  o	{
-  o	  "codigo_Produto": 0,
-  o	  "nome_Produto": "string",
-  o	  "valor_Produto": 0,
-  o	  "id_Categoria": 0
-  o	}
+Insere um novo produto usando o body JSON:
+ {
+    "codigo_Produto": 0,
+    "nome_Produto": "string",
+    "valor_Produto": 0,
+  	"id_Categoria": 0
+ }
 
 •	POST /api/Produto/AlterarProduto
-  o	Altera um produto existente usando o body JSON:
-  o	{
-  o	  "id_Produto": 0,
-  o	  "codigo_Produto": 0,
-  o	  "nome_Produto": "string",
-  o	  "valor_Produto": 0,
-  o	  "id_Categoria": 0
-  o	}
+  	Altera um produto existente usando o body JSON:
+ {
+  	"id_Produto": 0,
+  	"codigo_Produto": 0,
+  	"nome_Produto": "string",
+  	"valor_Produto": 0,
+  	"id_Categoria": 0
+ }
 
 •	DELETE /api/Produto/DeletarProduto?id={id}
-  o	Deleta um produto com base no ID informado na query string.
+  	Deleta um produto com base no ID informado na query string.
 ________________________________________
 Como Rodar o Projeto:
 
