@@ -45,34 +45,34 @@ Retorna um produto específico baseado no ID informado na query string.
 
 •	POST /api/Produto/BuscarProdutos
 Busca produtos de acordo com os filtros enviados no body em formato JSON:
- {
-    "id_Produto": 0,
-    "codigo_Produto": 0,
-    "nome_Produto": "string",
-    "valor_Produto": 0,
-    "id_Categoria": 0
- }
+ {  
+    "id_Produto": 0,  
+    "codigo_Produto": 0,  
+    "nome_Produto": "string",  
+    "valor_Produto": 0,  
+    "id_Categoria": 0  
+ }  
 
 •	POST /api/Produto/InserirProduto
 Insere um novo produto usando o body JSON:
- {
-    "codigo_Produto": 0,
-    "nome_Produto": "string",
-    "valor_Produto": 0,
-  	"id_Categoria": 0
- }
+ {  
+    "codigo_Produto": 0,  
+    "nome_Produto": "string",  
+    "valor_Produto": 0,  
+  	"id_Categoria": 0  
+ }  
 
-•	POST /api/Produto/AlterarProduto
+•	POST /api/Produto/AlterarProduto  
   	Altera um produto existente usando o body JSON:
- {
-  	"id_Produto": 0,
-  	"codigo_Produto": 0,
-  	"nome_Produto": "string",
-  	"valor_Produto": 0,
-  	"id_Categoria": 0
+ {  
+  	"id_Produto": 0,  
+  	"codigo_Produto": 0,  
+  	"nome_Produto": "string",  
+  	"valor_Produto": 0,  
+  	"id_Categoria": 0  
  }
 
-•	DELETE /api/Produto/DeletarProduto?id={id}
+•	DELETE /api/Produto/DeletarProduto?id={id}  
   	Deleta um produto com base no ID informado na query string.
 ________________________________________
 Como Rodar o Projeto:
