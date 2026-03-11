@@ -33,18 +33,18 @@ Tecnologias Utilizadas:
 •	C#
 •	SQL Server
 ________________________________________
-Estrutura de Endpoints da API
+Estrutura de Endpoints da API  
 Categoria
 
-•	GET /api/Categoria/BuscarCategoria
-Retorna todas as categorias cadastradas.
+•	GET /api/Categoria/BuscarCategoria  
+Retorna todas as categorias cadastradas.  
 Produto
 
-•	GET /api/Produto/BuscarUmProduto?id={id}
+•	GET /api/Produto/BuscarUmProduto?id={id}  
 Retorna um produto específico baseado no ID informado na query string.
 
-•	POST /api/Produto/BuscarProdutos
-Busca produtos de acordo com os filtros enviados no body em formato JSON:
+•	POST /api/Produto/BuscarProdutos  
+Busca produtos de acordo com os filtros enviados no body em formato JSON:  
  {  
     "id_Produto": 0,  
     "codigo_Produto": 0,  
@@ -53,8 +53,8 @@ Busca produtos de acordo com os filtros enviados no body em formato JSON:
     "id_Categoria": 0  
  }  
 
-•	POST /api/Produto/InserirProduto
-Insere um novo produto usando o body JSON:
+•	POST /api/Produto/InserirProduto  
+Insere um novo produto usando o body JSON:  
  {  
     "codigo_Produto": 0,  
     "nome_Produto": "string",  
@@ -63,7 +63,7 @@ Insere um novo produto usando o body JSON:
  }  
 
 •	POST /api/Produto/AlterarProduto  
-  	Altera um produto existente usando o body JSON:
+  	Altera um produto existente usando o body JSON:  
  {  
   	"id_Produto": 0,  
   	"codigo_Produto": 0,  
