@@ -1,0 +1,155 @@
+﻿@page "/ProdutosPage"
+@inject HttpClient Http
+
+<PageTitle>Produtos</PageTitle>
+<ConfirmModal @ref="confirmModal" Title="@ModalTitle" @bind-IsOpen="isOpenConfirmModal" Width="500" Height="@size">
+    <ChildContent>
+        @if (DeleteModal)
+        {
+            <div>Deseja deletar o produto : @DeleteIdProduto ?</div>
+        }
+        else
+        {
+            <div class="row mb-3 align-items-end">
+                <div class="col">
+                    <label class="form-label" style="color:red"></label>
+                  
+                </div>
+            </div>
+            <div class="row mb-3 align-items-end">
+                <div class="col">
+                    <label class="form-label">Código Produto</label>
+                    <InputNumber class="form-control" @bind-Value="CodigoProdutoModal" />
+                </div>
+            </div>
+            <div class="row mb-3 align-items-end">
+                <div class="col">
+                    <label class="form-label">Nome do Produto</label>
+                    <InputTextArea class="form-control no-resize single-line" rows="1" maxlength="100" @bind-Value="NomeProdutoModal" />
+                </div>
+            </div>
+            <div class="row mb-3 align-items-end">
+                <div class="col">
+                    <label class="form-label">Valor Produto</label>
+                    <InputNumber @bind-Value="ValorModal" class="form-control" step="0.01" />
+                </div>
+            </div>
+            <div class="row mb-3 align-items-end">
+                <div class="col">
+                    <label class="form-label">Categoria</label>
+                    <InputSelect class="form-control" @bind-Value="categoriaSelecionadaModal">
+                        <option value="-1">Selecione...</option>
+                        @if (categorias != null)
+                        {
+                            @foreach (var item in categorias)
+                            {
+                                <option value="@item.Id_Categoria">@item.Nome_Categoria</option>
+                            }
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+        }
+    </ChildContent>
+    <FooterContent>
+        @if (DeleteModal)
+        {
+            <button class="btn btn-primary" @onclick="DeletarProduto">Confirmar</button>
+        }
+        else if (AddicionarModal)
+        {
+            <button class="btn btn-primary" @onclick="AdicionarProduto">Adicionar Produto</button>
+        }
+        else if (AlterarModal)
+        {
+            <button class="btn btn-primary" @onclick="AlterarProduto">Alterar Produto</button>
+        }
+    </FooterContent>
+</ConfirmModal>
+<div class="row mb-3 align-items-end">
+    <div class="col-2">
+        <label class="form-label">Id Produto</label>
+        <InputNumber class="form-control" @bind-Value="IdProdutoBusca" />
+    </div>
+    <div class="col-2">
+        <label class="form-label">Código Produto</label>
+        <InputNumber class="form-control" @bind-Value="CodigoProdutoBusca" />
+    </div>
+    <div class="col">
+        <label class="form-label">Nome do Produto</label>
+        <InputTextArea class="form-control no-resize single-line" rows="1" maxlength="100" @bind-Value="NomeProdutoBusca" />
+    </div>
+    <div class="col">
+        <label class="form-label">Categoria</label>
+        <InputSelect class="form-control" @bind-Value="categoriaSelecionadaBusca">
+            <option value="-1">Selecione...</option>
+            @if (categorias != null)
+            {
+                @foreach (var item in categorias)
+                {
+                    <option value="@item.Id_Categoria">@item.Nome_Categoria</option>
+                }
+            }
+        </InputSelect>
+    </div>
+    <div class="col">
+        <button class="btn btn-secondary" @onclick="AbrirModalAdicionar">Adicionar Produto</button>
+    </div>
+</div>
+<br />
+<button class="btn btn-primary" @onclick="Buscar">Buscar</button>
+
+@if (produtos != null)
+{
+    @if (produtos.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id Produto</th>
+                    <th>CodigoProduto</th>
+                    <th>Nome Produto</th>
+                    <th>Valor Produto</th>
+                    <th>Id Categoria</th>
+                    <th>Nome Categoria</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in produtos)
+                {
+                    <tr>
+                        <td>@produto.Id_Produto.ToString()</td>
+                        <td>@produto.Codigo_Produto.ToString()</td>
+                        <td>@produto.Nome_Produto</td>
+                        <td>@produto.Valor_Produto</td>
+                        <td>@produto.Id_Categoria</td>
+                        <td>@produto.Nome_Categoria</td>
+                        <td>
+                            <a @onclick="@(e => AbrirModalAlterar(produto.Id_Produto))"><img class="Pointer" width="25" height="auto" title="Alterar" src="@EditImage" /></a>
+                            <a @onclick="@(e => DeletarModal(produto.Id_Produto))"><img class="Pointer" width="25" height="auto" title="Excluir" src="@DeleteImage" /></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><em>Nenhum produto encontrado!</em></p>
+    }
+}
+<style>
+    .no-resize {
+        resize: none;
+    }
+
+    .single-line {
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .Pointer:hover {
+        cursor: pointer;
+    }
+</style>
