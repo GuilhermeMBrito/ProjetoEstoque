@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 using ProjetoEstoque.Class;
 using System.Drawing;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using static System.Net.WebRequestMethods;
 
@@ -20,6 +21,13 @@ namespace ProjetoEstoque.Pages.Produto
         {
             get => _httpClient;
             set => _httpClient = value;
+        }
+        protected IJSRuntime _jsRuntime;
+        [Inject]
+        protected IJSRuntime JS
+        {
+            get => _jsRuntime;
+            set => _jsRuntime = value;
         }
         #endregion
 
@@ -209,6 +217,36 @@ namespace ProjetoEstoque.Pages.Produto
                 FecharModal();
                 await Buscar();
             }
+        }
+        private async Task ExportarCsv()
+        {
+            if (produtos == null || !produtos.Any())
+                return;
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("IdProduto;CodigoProduto;NomeProduto;ValorProduto;IdCategoria;NomeCategoria");
+
+            foreach (var produto in produtos)
+            {
+                sb.AppendLine(
+                    $"{produto.Id_Produto};" +
+                    $"{produto.Codigo_Produto};" +
+                    $"\"{produto.Nome_Produto}\";" +
+                    $"{produto.Valor_Produto};" +
+                    $"{produto.Id_Categoria};" +
+                    $"\"{produto.Nome_Categoria}\"");
+            }
+
+            // UTF8 COM BOM
+            byte[] bom = Encoding.UTF8.GetPreamble();
+            byte[] csvBytes = Encoding.UTF8.GetBytes(sb.ToString());
+
+            byte[] arquivo = bom.Concat(csvBytes).ToArray();
+
+            var csvBase64 = Convert.ToBase64String(arquivo);
+
+            await JS.InvokeVoidAsync("downloadFile","produtos.csv","text/csv;charset=utf-8",csvBase64);
         }
 
         private void FecharModal()

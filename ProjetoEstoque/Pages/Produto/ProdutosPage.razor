@@ -1,6 +1,6 @@
 ﻿@page "/ProdutosPage"
 @inject HttpClient Http
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <PageTitle>Produtos</PageTitle>
 <ConfirmModal @ref="confirmModal" Title="@ModalTitle" @bind-IsOpen="isOpenConfirmModal" Width="500" Height="@size">
     <ChildContent>
@@ -13,7 +13,7 @@
             <div class="row mb-3 align-items-end">
                 <div class="col">
                     <label class="form-label" style="color:red"></label>
-                  
+
                 </div>
             </div>
             <div class="row mb-3 align-items-end">
@@ -66,6 +66,14 @@
         }
     </FooterContent>
 </ConfirmModal>
+<div class="d-flex justify-content-end gap-2 mb-3">
+    <div class="col-auto">
+        <button class="btn btn-secondary" @onclick="AbrirModalAdicionar"><i class="bi bi-plus"></i>&nbsp;Adicionar Produto</button>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" @onclick="ExportarCsv"><i class="bi bi-download"></i>&nbsp;Baixar CSV</button>
+    </div>
+</div>
 <div class="row mb-3 align-items-end">
     <div class="col-2">
         <label class="form-label">Id Produto</label>
@@ -91,9 +99,6 @@
                 }
             }
         </InputSelect>
-    </div>
-    <div class="col">
-        <button class="btn btn-secondary" @onclick="AbrirModalAdicionar">Adicionar Produto</button>
     </div>
 </div>
 <br />
@@ -153,3 +158,20 @@
         cursor: pointer;
     }
 </style>
+<script>
+    window.downloadFile = (fileName, contentType, base64Data) => {
+        const bytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
+
+        const blob = new Blob([bytes], { type: contentType });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(link.href);
+    };
+</script>
