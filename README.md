@@ -74,7 +74,7 @@ Insere um novo produto usando o body JSON:
 
 •	DELETE /api/Produto/DeletarProduto?id={id}  
   	Deleta um produto com base no ID informado na query string.
-________________________________________
+__________________________________________
 Como Rodar o Projeto:
 
 1.	Clonar o repositório
@@ -87,7 +87,7 @@ o	Definir o projeto API como startup e iniciar.
 6.	Rodar o Front-end Blazor
 o	Definir o projeto Blazor como startup e iniciar.
 o	O front-end se conectará automaticamente à API.
-________________________________________
+__________________________________________
 Observações
 •	O front-end depende da API para todas as operações de banco de dados.
 •	As bibliotecas DBHandler e DBServices podem ser reutilizadas em outros projetos .NET que precisem de acesso estruturado ao banco de dados.
